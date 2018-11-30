@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="orden">
+  <button class="button">Agregar</button>
+
+  <ul>
+
+  </ul>
+  <script>
+    class Articulos {
+      constructor() {
+        this.articulos = [
+        'manzana',
+        'naranja'
+        ]
+        this.subscriptores=[]
+      }
+
+      agregarArticulo(articulo) {
+        this.articulos.push(articulo)
+        this.notificarSubscriptores()
+      }
+
+      agregarSubscriptor(callback) {
+        this.subscriptores.push(callback)
+      }
+
+      notificarSubscriptores() {
+        this.subscriptores.forEach((subscriptor)=> {
+          subscriptor(this.articulos)
+        })
+      }
+    }
+
+
+    class Vista {
+      constructor() {
+        articulos.agregarSubscriptor(this.render)
+      }
+      render(articulos) {
+        document.querySelector('ul'). innerHTML =
+          articulos.map((articulo) => `<li> ${articulo}</li>`)
+          .join('')
+      }
+    }
+
+    document.querySelector('button').addEventListener('click', ()=> {
+      const input = document.querySelector('input')
+      const articulo = input.value
+      articulos.agregarArticulo(articulo)
+    })
+
+    const articulos = new Articulos()
+     const vista = new Vista()
+  </script>
+</body>
+</html>
